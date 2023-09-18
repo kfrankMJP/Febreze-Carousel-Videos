@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="assets/style.css" />
+    <title>Febreze Auto Show</title>
+  </head>
+  <body>
+    <!-- data-src for each video will need to be updated with correct video -->
+    <section class="top slider">
+      <img
+        class="video-button"
+        src="assets/images/Fresh.png"
+        data-src="assets/videos/Febreze-Auto-Show_FRESH.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/Gain.png"
+        data-src="assets/videos/Febreze-Auto-Show_GAIN.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/Leather.png"
+        data-src="assets/videos/Febreze-Auto-Show_LEATHER.mp4"
+      />
+      <!-- Will need new image -->
+      <img src="http://placehold.it/350x197?text=4" />
+    </section>
+    <!-- Middle Row -->
+    <section class="middle" dir="rtl">
+      <img
+        class="video-button"
+        src="assets/images/MidnightStorm.png"
+        data-src="assets/videos/Febreze-Auto-Show_MIDNIGHT-STORM.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/Noir.png"
+        data-src="assets/videos/Febreze-Auto-Show_NOIR.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/OceanBreeze.png"
+        data-src="assets/videos/Febreze-Auto-Show_OCEAN-BREEZE.mp4"
+      />
+      <!-- Will need new image -->
+      <img src="http://placehold.it/350x197?text=4" />
+    </section>
+    <section class="bottom slider">
+      <img
+        class="video-button"
+        src="assets/images/OldSpice.png"
+        data-src="assets/videos/Febreze-Auto-Show_OLDSPICE.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/OldSpiceSwagger.png"
+        data-src="assets/videos/Febreze-Auto-Show_OLDSPICE-SWAGGER.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/PlatinumIce.png"
+        data-src="assets/videos/Febreze-Auto-Show_PLATINUM-ICE.mp4"
+      />
+      <img
+        class="video-button"
+        src="assets/images/TropicalBeach.png"
+        data-src="assets/videos/Febreze-Auto-Show_TROPICAL-BEACH.mp4"
+      />
+    </section>
+
+    <div class="modal" onclick="closeModal()">
+      <video class="modal-video" autoplay muted id="modalVideo">
+        <source src="" type="video/mp4" id="modalVideoSource" />
+      </video>
+    </div>
+
+    <script src="assets/slick.min.js" type="text/javascript"></script>
+    <script
+      src="assets/script.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+    <script>
+      const modalVideo = document.getElementById("modalVideo");
+
+      function openModal(videoSrc) {
+        const modal = document.querySelector(".modal");
+        const modalVideoSource = document.getElementById("modalVideoSource");
+        modalVideoSource.src = videoSrc;
+        modal.style.display = "block";
+
+        setTimeout(() => {
+          modal.style.transform = "scale(1)";
+          modal.style.opacity = "1";
+          modalVideo.load();
+          modalVideo.play();
+        }, 500);
+      }
+
+      function closeModal() {
+        const modal = document.querySelector(".modal");
+        const modalVideo = document.querySelector(".modal-video");
+        modal.style.transform = "scale(0.5)";
+        setTimeout(() => {
+          modal.style.display = "none";
+          modal.style.opacity = "0";
+        }, 300);
+
+        modalVideo.pause();
+        modalVideo.currentTime = 0;
+      }
+
+      const videos = document.querySelectorAll(".video-button");
+      videos.forEach((video) => {
+        video.addEventListener("click", () => {
+          const videoSrc = video.getAttribute("data-src");
+          openModal(videoSrc);
+        });
+      });
+
+      $(document).on("ready", function () {
+        $(".slider").slick({
+          autoplay: true,
+          autoplaySpeed: 3000,
+          dots: false,
+          infinite: true,
+          slidesToShow: 3,
+          pauseOnHover: false,
+          arrows: false,
+          draggable: false,
+        });
+        $(".middle").slick({
+          autoplay: true,
+          autoplaySpeed: 3000,
+          dots: false,
+          infinite: true,
+          slidesToShow: 3,
+          pauseOnHover: false,
+          arrows: false,
+          rtl: true,
+          draggable: false,
+        });
+      });
+    </script>
+  </body>
+</html>
